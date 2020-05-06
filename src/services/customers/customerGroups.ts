@@ -1,108 +1,108 @@
-import { ObjectID } from 'mongodb'
-import { db } from '../../lib/mongo'
-import parse from '../../lib/parse'
+import { ObjectID } from "mongodb"
+import { db } from "../../lib/mongo"
+import parse from "../../lib/parse"
 
 class CustomerGroupsService {
-    getGroups(params = {}) {
-        return db
-            .collection('customerGroups')
-            .find()
-            .toArray()
-            .then((items) => items.map((item) => this.changeProperties(item)))
+  getGroups(params = {}) {
+    return db
+      .collection("customerGroups")
+      .find()
+      .toArray()
+      .then(items => items.map(item => this.changeProperties(item)))
+  }
+
+  getSingleGroup(id) {
+    if (!ObjectID.isValid(id)) {
+      return Promise.reject("Invalid identifier")
+    }
+    const groupObjectID = new ObjectID(id)
+
+    return db
+      .collection("customerGroups")
+      .findOne({ _id: groupObjectID })
+      .then(item => this.changeProperties(item))
+  }
+
+  addGroup(data) {
+    const group = this.getValidDocumentForInsert(data)
+    return db
+      .collection("customerGroups")
+      .insertMany([group])
+      .then(res => this.getSingleGroup(res.ops[0]._id.toString()))
+  }
+
+  updateGroup(id, data) {
+    if (!ObjectID.isValid(id)) {
+      return Promise.reject("Invalid identifier")
+    }
+    const groupObjectID = new ObjectID(id)
+    const group = this.getValidDocumentForUpdate(id, data)
+
+    return db
+      .collection("customerGroups")
+      .updateOne(
+        {
+          _id: groupObjectID,
+        },
+        { $set: group }
+      )
+      .then(this.getSingleGroup(id))
+  }
+
+  deleteGroup(id) {
+    if (!ObjectID.isValid(id)) {
+      return Promise.reject("Invalid identifier")
+    }
+    const groupObjectID = new ObjectID(id)
+    return db
+      .collection("customerGroups")
+      .deleteOne({ _id: groupObjectID })
+      .then(deleteResponse => deleteResponse.deletedCount > 0)
+  }
+
+  getValidDocumentForInsert(data) {
+    const group = {
+      date_created: new Date(),
+      name: String,
+      description: String,
     }
 
-    getSingleGroup(id) {
-        if (!ObjectID.isValid(id)) {
-            return Promise.reject('Invalid identifier')
-        }
-        const groupObjectID = new ObjectID(id)
+    group.name = parse.getString(data.name)
+    group.description = parse.getString(data.description)
 
-        return db
-            .collection('customerGroups')
-            .findOne({ _id: groupObjectID })
-            .then((item) => this.changeProperties(item))
+    return group
+  }
+
+  getValidDocumentForUpdate(id, data) {
+    if (Object.keys(data).length === 0) {
+      return new Error("Required fields are missing")
     }
 
-    addGroup(data) {
-        const group = this.getValidDocumentForInsert(data)
-        return db
-            .collection('customerGroups')
-            .insertMany([group])
-            .then((res) => this.getSingleGroup(res.ops[0]._id.toString()))
+    const group = {
+      date_updated: new Date(),
+      name: String,
+      description: String,
     }
 
-    updateGroup(id, data) {
-        if (!ObjectID.isValid(id)) {
-            return Promise.reject('Invalid identifier')
-        }
-        const groupObjectID = new ObjectID(id)
-        const group = this.getValidDocumentForUpdate(id, data)
-
-        return db
-            .collection('customerGroups')
-            .updateOne(
-                {
-                    _id: groupObjectID,
-                },
-                { $set: group }
-            )
-            .then(this.getSingleGroup(id))
+    if (data.name !== undefined) {
+      group.name = parse.getString(data.name)
     }
 
-    deleteGroup(id) {
-        if (!ObjectID.isValid(id)) {
-            return Promise.reject('Invalid identifier')
-        }
-        const groupObjectID = new ObjectID(id)
-        return db
-            .collection('customerGroups')
-            .deleteOne({ _id: groupObjectID })
-            .then((deleteResponse) => deleteResponse.deletedCount > 0)
+    if (data.description !== undefined) {
+      group.description = parse.getString(data.description)
     }
 
-    getValidDocumentForInsert(data) {
-        const group = {
-            date_created: new Date(),
-            name: String,
-            description: String,
-        }
+    return group
+  }
 
-        group.name = parse.getString(data.name)
-        group.description = parse.getString(data.description)
-
-        return group
+  changeProperties(item) {
+    if (item) {
+      item.id = item._id.toString()
+      delete item._id
     }
 
-    getValidDocumentForUpdate(id, data) {
-        if (Object.keys(data).length === 0) {
-            return new Error('Required fields are missing')
-        }
-
-        const group = {
-            date_updated: new Date(),
-            name: String,
-            description: String,
-        }
-
-        if (data.name !== undefined) {
-            group.name = parse.getString(data.name)
-        }
-
-        if (data.description !== undefined) {
-            group.description = parse.getString(data.description)
-        }
-
-        return group
-    }
-
-    changeProperties(item) {
-        if (item) {
-            item.id = item._id.toString()
-            delete item._id
-        }
-
-        return item
-    }
+    return item
+  }
 }
 
 export default new CustomerGroupsService()
