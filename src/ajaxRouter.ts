@@ -83,7 +83,7 @@ const fillCartItems = cartResponse => {
         fields:
           "images,enabled,stock_quantity,variants,path,stock_backorder,stock_preorder",
       })
-      .then(({ status, json }) => {
+      .then(({ json }) => {
         const newCartItem = cart.items.map(cartItem =>
           fillCartItemWithProductData(json.data, cartItem)
         )
