@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "system",
+    "module": "commonjs",
     "noImplicitReturns": false,
     "noUnusedLocals": false,
-    "outFile": "build/index.js",
+    "outDir": "build",
     "sourceMap": true,
     "strict": false,
     "target": "es2017",

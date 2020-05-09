@@ -10,7 +10,7 @@ const dbCred =
 const dbUrl =
   process.env.DB_URL || `mongodb://${dbCred}${dbHost}:${dbPort}/${dbName}`
 
-module.exports = {
+const Settings = {
   // used by Store (server side)
   apiBaseUrl: process.env.API_BASE_URL || `http://localhost:3001/api/v1`,
 
@@ -69,3 +69,5 @@ module.exports = {
 
   developerMode: process.env.DEVELOPER_MODE || true,
 }
+
+export default Settings
