@@ -12,26 +12,23 @@
   ],
   "homepage": "https://cezerin.org",
   "bugs": "https://github.com/cezerin2/cezerin2/issues",
-  "license": "MIT",
-  "author": {
-    "name": "Restmount <jsonmount@gmail.com>",
-    "url": "https://github.com/restmount"
-  },
-  "main": "src/index.js",
+  "license": "Unlicense",
+  "author": "Restmount, Himadu",
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/cezerin2/cezerin2"
   },
   "scripts": {
     "compile": "tsc",
-    "setup": "node -r esm src/setup.js",
+    "setup": "node -r esm src/setup.ts",
     "theme:install": "./scripts/theme-install.sh",
     "theme:export": "./scripts/theme-export.sh",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write \"src/**/*.js\" \"theme/**/*.js\"",
     "precommit": "lint-staged",
-    "start": "node -r esm src/index.js"
+    "start": "node -r esm src/index.ts"
   },
   "lint-staged": {
     "*.ts": [
