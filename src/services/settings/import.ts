@@ -53,7 +53,7 @@ class ImportSettingsService {
       return new Error("Required fields are missing")
     }
 
-    let settings = { apikey: String, sheetid: String, range: String }
+    const settings = { apikey: String, sheetid: String, range: String }
 
     if (data.apikey !== undefined) {
       settings.apikey = parse.getString(data.apikey)

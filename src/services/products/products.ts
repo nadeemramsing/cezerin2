@@ -323,7 +323,7 @@ class ProductsService {
     const regularPrice = "$regular_price"
     const costPrice = "$cost_price"
 
-    let project = {
+    const project = {
       category_ids: 1,
       related_product_ids: 1,
       enabled: 1,
@@ -699,7 +699,7 @@ class ProductsService {
       name: String,
       description: String,
       meta_description: String,
-      meta_title: String,
+      metaTitle: String,
       tags: {},
       attributes: {},
       enabled: String,
@@ -731,7 +731,7 @@ class ProductsService {
     product.name = parse.getString(data.name)
     product.description = parse.getString(data.description)
     product.meta_description = parse.getString(data.meta_description)
-    product.meta_title = parse.getString(data.meta_title)
+    product.metaTitle = parse.getString(data.meta_title)
     product.tags = parse.getArrayIfValid(data.tags) || []
     product.attributes = this.getValidAttributesArray(data.attributes)
     product.enabled = parse.getBooleanIfValid(data.enabled, true)

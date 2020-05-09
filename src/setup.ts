@@ -25,57 +25,57 @@ const addPage = async (db, pageObject) => {
 const addAllPages = async db => {
   await addPage(db, {
     slug: "",
-    meta_title: "Home",
+    metaTitle: "Home",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "checkout",
-    meta_title: "Checkout",
+    metaTitle: "Checkout",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "checkout-success",
-    meta_title: "Thank You!",
+    metaTitle: "Thank You!",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "about",
-    meta_title: "About us",
+    metaTitle: "About us",
     enabled: true,
-    is_system: false,
+    isSystem: false,
   })
   await addPage(db, {
     slug: "login",
-    meta_title: "Login",
+    metaTitle: "Login",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "register",
-    meta_title: "Register",
+    metaTitle: "Register",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "customer-account",
-    meta_title: "Customer Account",
+    metaTitle: "Customer Account",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "forgot-password",
-    meta_title: "Forgot Password",
+    metaTitle: "Forgot Password",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
   await addPage(db, {
     slug: "reset-password",
-    meta_title: "Reset Password",
+    metaTitle: "Reset Password",
     enabled: true,
-    is_system: true,
+    isSystem: true,
   })
 }
 

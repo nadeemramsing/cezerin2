@@ -92,7 +92,7 @@ class S3Service {
   }
 
   emptyDir(path) {
-    let params = {
+    const params = {
       Bucket: BUCKET,
       Prefix: path,
       Delete: undefined,
