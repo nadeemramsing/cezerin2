@@ -1,6 +1,7 @@
 import security from "../lib/security"
 import ThemeService from "../services/theme/theme"
 import ThemeSettingsService from "../services/theme/theme"
+import ThemeSettingsServiceSettings from "../services/theme/settings"
 import ThemeAssetsService from "../services/theme/assets"
 import ThemePlaceholdersService from "../services/theme/placeholders"
 
@@ -76,17 +77,17 @@ class ThemeRoute {
     )
   }
 
-  exportTheme(req, res, next) {
+  exportTheme(req) {
     ThemeService.exportTheme(req)
   }
 
-  installTheme(req, res, next) {
+  installTheme(req, res) {
     ThemeService.installTheme(req, res)
   }
 
   async getSettings(req, res, next) {
     try {
-      const data = await ThemeSettingsService.getSettings()
+      const data = await ThemeSettingsServiceSettings.getSettings()
       return res.send(data)
     } catch (err) {
       return next(err)
@@ -95,7 +96,7 @@ class ThemeRoute {
 
   async updateSettings(req, res, next) {
     try {
-      await ThemeSettingsService.updateSettings(req.body)
+      await ThemeSettingsServiceSettings.updateSettings(req.body)
       return res.end()
     } catch (err) {
       return next(err)
@@ -104,7 +105,7 @@ class ThemeRoute {
 
   async getSettingsSchema(req, res, next) {
     try {
-      const data = await ThemeSettingsService.getSettingsSchema()
+      const data = await ThemeSettingsServiceSettings.getSettingsSchema()
       return res.send(data)
     } catch (err) {
       return next(err)
