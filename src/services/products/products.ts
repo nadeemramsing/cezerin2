@@ -636,8 +636,8 @@ class ProductsService {
   getSingleProduct(id) {
     if (!ObjectID.isValid(id)) {
       return Promise.reject("Invalid identifier")
-    }
-    return this.getProducts({ ids: id, limit: 1 }).then(products =>
+    } // REMOVED { ids: id, limit: 1 } AS A PARAMS FOR TEST
+    return this.getProducts().then(products =>
       products.data.length > 0 ? products.data[0] : {}
     )
   }
@@ -684,7 +684,7 @@ class ProductsService {
       })
   }
 
-  getValidDocumentForInsert(data) {
+  getValidDocumentForInsert(data): any {
     //  Allow empty product to create draft
 
     const product = {
