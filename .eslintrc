@@ -1,4 +1,16 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
+}
+/*
+
+{
   "parser": "babel-eslint",
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["react", "prettier", "jsx-a11y", "import"],
@@ -21,3 +33,4 @@
     "no-console": "off"
   }
 }
+*/
