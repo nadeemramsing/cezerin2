@@ -6,6 +6,15 @@ import settings from "../../lib/settings"
 import dashboardWebSocket from "../../lib/dashboardWebSocket"
 
 class ThemesService {
+  getSettings() {
+    throw new Error("Method not implemented.")
+  }
+  updateSettings(body: any) {
+    throw new Error("Method not implemented.")
+  }
+  getSettingsSchema() {
+    throw new Error("Method not implemented.")
+  }
   exportTheme(res) {
     const randomFileName = Math.floor(Math.random() * 10000)
     exec(
