@@ -20,15 +20,14 @@
     "url": "https://github.com/cezerin2/cezerin2"
   },
   "scripts": {
-    "compile": "tsc",
-    "setup": "node -r esm src/setup.ts",
+    "setup": "tsc && node -r esm src/setup.ts",
     "theme:install": "./scripts/theme-install.sh",
     "theme:export": "./scripts/theme-export.sh",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --write \"src/**/*.js\" \"theme/**/*.js\"",
     "precommit": "lint-staged",
-    "start": "node -r esm src/index.ts"
+    "start": "tsc && node -r esm build/index.js"
   },
   "lint-staged": {
     "*.ts": [
