@@ -11,19 +11,19 @@
     "cms"
   ],
   "homepage": "https://cezerin.org",
-  "bugs": "https://github.com/cezerin2/cezerin2/issues",
+  "bugs": "https://github.com/Cezerin2/cezerin2/issues",
   "license": "Unlicense",
   "author": "Restmount, Himadu",
   "main": "src/index.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cezerin2/cezerin2"
+    "url": "https://github.com/Cezerin2/cezerin2"
   },
   "scripts": {
     "setup": "tsc && node -r esm build/setup.js",
     "theme:install": "./scripts/theme-install.sh",
     "theme:export": "./scripts/theme-export.sh",
-    "lint": "eslint . --fix && prettier --write . && tsc",
+    "lint": "eslint . --fix && prettier --write . && jest && tsc",
     "precommit": "lint-staged",
     "start": "concurrently \"tsc -w \" \"nodemon -r esm build/index.js\""
   },
@@ -63,7 +63,6 @@
     "sitemap": "^6.1.0",
     "slug": "^2.1.1",
     "stripe": "^8.39.1",
-    "typescript": "^3.8.3",
     "ua-parser-js": "^0.7.21",
     "winston": "^3.2.1",
     "ws": "^7.2.3"
@@ -80,11 +79,13 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "html-webpack-plugin": "^4.0.4",
+    "jest": "^26.0.1",
     "lint-staged": "^10.1.2",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.3",
     "postcss-loader": "^3.0.0",
-    "prettier": "^2.0.4"
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
   },
   "engines": {
     "node": ">= 8.0.0",
