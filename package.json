@@ -71,7 +71,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
-    "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.1.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -85,11 +84,7 @@
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.3",
     "postcss-loader": "^3.0.0",
-    "prettier": "^2.0.4",
-    "sass-loader": "^8.0.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "workbox-webpack-plugin": "^5.1.2"
+    "prettier": "^2.0.4"
   },
   "engines": {
     "node": ">= 8.0.0",
