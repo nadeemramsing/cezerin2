@@ -28,8 +28,8 @@
     "start": "concurrently \"tsc -w \" \"nodemon -r esm build/index.js\""
   },
   "lint-staged": {
-    "*.ts": [
-      "prettier --write",
+    "*": [
+      "npm run lint",
       "git add"
     ]
   },
