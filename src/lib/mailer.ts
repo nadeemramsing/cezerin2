@@ -3,14 +3,14 @@ import nodemailer from "nodemailer"
 import smtpTransport from "nodemailer-smtp-transport"
 import settings from "./settings"
 import EmailSettingsService from "../services/settings/email"
-
+const { host, port, secure, user, pass } = settings.smtpServer
 const SMTP_FROM_CONFIG_FILE = {
-  host: settings.smtpServer.host,
-  port: settings.smtpServer.port,
-  secure: settings.smtpServer.secure,
+  host,
+  port,
+  secure,
   auth: {
-    user: settings.smtpServer.user,
-    pass: settings.smtpServer.pass,
+    user,
+    pass,
   },
 }
 
