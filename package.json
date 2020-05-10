@@ -68,6 +68,7 @@
     "ws": "^7.2.3"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "concurrently": "^5.1.0",
