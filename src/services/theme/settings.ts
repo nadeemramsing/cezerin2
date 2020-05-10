@@ -10,7 +10,7 @@ const cache = new lruCache({
 })
 
 const THEME_SETTINGS_CACHE_KEY = "themesettings"
-const SETTINGS_FILE = path.resolve("theme.json")
+const SETTINGS_FILE = path.resolve("theme/theme.json")
 const SETTINGS_SCHEMA_FILE = path.resolve(
   `theme/${serverSettings.language}.json`
 )

@@ -13,14 +13,14 @@ import SettingsService from "./services/settings/settings"
 import OrderItemsService from "./services/orders/orderItems"
 
 // cost factor for hashes
-const { saltRounds } = serverSettings
+const { saltRounds, apiBaseUrl } = serverSettings
 
 const ajaxRouter = express.Router()
 const TOKEN_PAYLOAD = { email: "store", scopes: ["admin"] }
 const STORE_ACCESS_TOKEN = jwt.sign(TOKEN_PAYLOAD, serverSettings.jwtSecretKey)
 
 const api = new CezerinClient({
-  apiBaseUrl: serverSettings.apiBaseUrl,
+  apiBaseUrl,
   apiToken: STORE_ACCESS_TOKEN,
 })
 
@@ -360,7 +360,7 @@ ajaxRouter.post("/register", async (req, res, next) => {
       return false
     }
 
-    (async () => {
+    ;(async () => {
       // decode token parts and check if valid email is the second part of them
       const firstName = await AuthHeader.decodeUserLoginAuth(
         requestTokenArray[0]
