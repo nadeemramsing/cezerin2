@@ -5,82 +5,81 @@ import ThemeAssetsService from "../services/theme/assets"
 import ThemePlaceholdersService from "../services/theme/placeholders"
 
 class ThemeRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: any) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+
+  registerRoutes(router) {
+    router.get(
       "/v1/theme/export",
       security.checkUserScope.bind(this, security.scope.READ_THEME),
       this.exportTheme.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/theme/install",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.installTheme.bind(this)
     )
 
-    this.router.get(
-      "/v1/theme",
+    router.get(
+      "/v1/theme/settings",
       security.checkUserScope.bind(this, security.scope.READ_THEME),
       this.getSettings.bind(this)
     )
-    this.router.put(
-      "/v1/theme",
+    router.put(
+      "/v1/theme/settings",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.updateSettings.bind(this)
     )
-    this.router.get(
-      "/v1/theme_schema",
+    router.get(
+      "/v1/theme/settings_schema",
       security.checkUserScope.bind(this, security.scope.READ_THEME),
       this.getSettingsSchema.bind(this)
     )
 
-    this.router.post(
+    router.post(
       "/v1/theme/assets",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.uploadFile.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/theme/assets/:file",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.deleteFile.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/theme/placeholders",
       security.checkUserScope.bind(this, security.scope.READ_THEME),
       this.getPlaceholders.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/theme/placeholders",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.addPlaceholder.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/theme/placeholders/:key",
       security.checkUserScope.bind(this, security.scope.READ_THEME),
       this.getSinglePlaceholder.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/theme/placeholders/:key",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.updatePlaceholder.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/theme/placeholders/:key",
       security.checkUserScope.bind(this, security.scope.WRITE_THEME),
       this.deletePlaceholder.bind(this)
     )
   }
 
-  exportTheme(req) {
-    ThemeService.exportTheme(req)
+  exportTheme(req, res, next) {
+    ThemeService.exportTheme(res)
   }
 
-  installTheme(req, res) {
+  installTheme(req, res, next) {
     ThemeService.installTheme(req, res)
   }
 
