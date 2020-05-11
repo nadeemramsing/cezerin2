@@ -1,27 +1,26 @@
 import security from "../lib/security"
 import settings from "../lib/settings"
 import AssetsService from "../services/assets/assets"
+import { Router } from "express"
 
 const filesPath = settings.assetServer.filesUploadPath
 
 class FilesRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/files",
       security.checkUserScope.bind(this, security.scope.READ_FILES),
       this.getFiles.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/files",
       security.checkUserScope.bind(this, security.scope.WRITE_FILES),
       this.uploadFile.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/files/:file",
       security.checkUserScope.bind(this, security.scope.WRITE_FILES),
       this.deleteFile.bind(this)

@@ -1,34 +1,33 @@
 import security from "../lib/security"
 import RedirectsService from "../services/redirects"
+import { Router } from "express"
 
 class RedirectsRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/redirects",
       security.checkUserScope.bind(this, security.scope.READ_SETTINGS),
       this.getRedirects.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/redirects",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.addRedirect.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/redirects/:id",
       security.checkUserScope.bind(this, security.scope.READ_SETTINGS),
       this.getSingleRedirect.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/redirects/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.updateRedirect.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/redirects/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.deleteRedirect.bind(this)
@@ -52,9 +51,9 @@ class RedirectsRoute {
       .catch(next)
   }
 
-  addRedirect(req, res, next) {
-    RedirectsService.addRedirect(req.body)
-      .then(data => res.send(data))
+  addRedirect(request: Request, response, next) {
+    RedirectsService.addRedirect(request.body)
+      .then(data => response.send(data))
       .catch(next)
   }
 

@@ -3,17 +3,15 @@ import AppSettingsService from "../services/apps/settings"
 
 class AppsRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/apps/:key/settings",
       security.checkUserScope.bind(this, security.scope.READ_SETTINGS),
       this.getSettings.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/apps/:key/settings",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.updateSettings.bind(this)

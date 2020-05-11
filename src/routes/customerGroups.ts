@@ -3,32 +3,30 @@ import CustomerGroupsService from "../services/customers/customerGroups"
 
 class CustomerGroupsRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/customer_groups",
       security.checkUserScope.bind(this, security.scope.READ_CUSTOMER_GROUPS),
       this.getGroups.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/customer_groups",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMER_GROUPS),
       this.addGroup.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/customer_groups/:id",
       security.checkUserScope.bind(this, security.scope.READ_CUSTOMER_GROUPS),
       this.getSingleGroup.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/customer_groups/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMER_GROUPS),
       this.updateGroup.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/customer_groups/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMER_GROUPS),
       this.deleteGroup.bind(this)

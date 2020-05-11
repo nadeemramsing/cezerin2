@@ -5,127 +5,126 @@ import OrderItemsService from "../services/orders/orderItems"
 import OrdertTansactionsService from "../services/orders/orderTransactions"
 import OrdertDiscountsService from "../services/orders/orderDiscounts"
 import PaymentGateways from "../paymentGateways"
+import { Router } from "express"
 
 class OrdersRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/orders",
       security.checkUserScope.bind(this, security.scope.READ_ORDERS),
       this.getOrders.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/orders",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.addOrder.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/orders/:id",
       security.checkUserScope.bind(this, security.scope.READ_ORDERS),
       this.getSingleOrder.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateOrder.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/orders/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.deleteOrder.bind(this)
     )
 
-    this.router.put(
+    router.put(
       "/v1/orders/:id/recalculate",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.recalculateOrder.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/checkout",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.checkoutOrder.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/cancel",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.cancelOrder.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/close",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.closeOrder.bind(this)
     )
 
-    this.router.put(
+    router.put(
       "/v1/orders/:id/billing_address",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateBillingAddress.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/shipping_address",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateShippingAddress.bind(this)
     )
 
-    this.router.post(
+    router.post(
       "/v1/orders/:id/items",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.addItem.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/items/:item_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateItem.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/orders/:id/items/:item_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.deleteItem.bind(this)
     )
 
-    this.router.post(
+    router.post(
       "/v1/orders/:id/transactions",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.addTransaction.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/transactions/:transaction_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateTransaction.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/orders/:id/transactions/:transaction_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.deleteTransaction.bind(this)
     )
 
-    this.router.post(
+    router.post(
       "/v1/orders/:id/discounts",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.addDiscount.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/orders/:id/discounts/:discount_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.updateDiscount.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/orders/:id/discounts/:discount_id",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.deleteDiscount.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/orders/:id/payment_form_settings",
       security.checkUserScope.bind(this, security.scope.READ_ORDERS),
       this.getPaymentFormSettings.bind(this)
     )
 
-    this.router.post(
+    router.post(
       "/v1/orders/:id/charge",
       security.checkUserScope.bind(this, security.scope.WRITE_ORDERS),
       this.chargeOrder.bind(this)

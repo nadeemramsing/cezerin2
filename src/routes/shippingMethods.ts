@@ -3,32 +3,30 @@ import ShippingMethodsService from "../services/orders/shippingMethods"
 
 class ShippingMethodsRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/shipping_methods",
       security.checkUserScope.bind(this, security.scope.READ_SHIPPING_METHODS),
       this.getMethods.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/shipping_methods",
       security.checkUserScope.bind(this, security.scope.WRITE_SHIPPING_METHODS),
       this.addMethod.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/shipping_methods/:id",
       security.checkUserScope.bind(this, security.scope.READ_SHIPPING_METHODS),
       this.getSingleMethod.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/shipping_methods/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SHIPPING_METHODS),
       this.updateMethod.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/shipping_methods/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SHIPPING_METHODS),
       this.deleteMethod.bind(this)

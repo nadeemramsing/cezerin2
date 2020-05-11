@@ -3,32 +3,30 @@ import WebhooksService from "../services/webhooks"
 
 class WebhooksRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/webhooks",
       security.checkUserScope.bind(this, security.scope.READ_SETTINGS),
       this.getWebhooks.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/webhooks",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.addWebhook.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/webhooks/:id",
       security.checkUserScope.bind(this, security.scope.READ_SETTINGS),
       this.getSingleWebhook.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/webhooks/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.updateWebhook.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/webhooks/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_SETTINGS),
       this.deleteWebhook.bind(this)

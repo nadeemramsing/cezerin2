@@ -1,14 +1,13 @@
 import security from "../lib/security"
 import CategoriesService from "../services/products/productCategories"
+import { Router } from "express"
 
 class ProductCategoriesRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/product_categories",
       security.checkUserScope.bind(
         this,
@@ -16,7 +15,7 @@ class ProductCategoriesRoute {
       ),
       this.getCategories.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/product_categories",
       security.checkUserScope.bind(
         this,
@@ -24,7 +23,7 @@ class ProductCategoriesRoute {
       ),
       this.addCategory.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/product_categories/:id",
       security.checkUserScope.bind(
         this,
@@ -32,7 +31,7 @@ class ProductCategoriesRoute {
       ),
       this.getSingleCategory.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/product_categories/:id",
       security.checkUserScope.bind(
         this,
@@ -40,7 +39,7 @@ class ProductCategoriesRoute {
       ),
       this.updateCategory.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/product_categories/:id",
       security.checkUserScope.bind(
         this,
@@ -48,7 +47,7 @@ class ProductCategoriesRoute {
       ),
       this.deleteCategory.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/product_categories/:id/image",
       security.checkUserScope.bind(
         this,
@@ -56,7 +55,7 @@ class ProductCategoriesRoute {
       ),
       this.uploadCategoryImage.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/product_categories/:id/image",
       security.checkUserScope.bind(
         this,

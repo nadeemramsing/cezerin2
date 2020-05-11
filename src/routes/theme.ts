@@ -3,13 +3,14 @@ import ThemeService from "../services/theme/theme"
 import ThemeSettingsService from "../services/theme/settings"
 import ThemeAssetsService from "../services/theme/assets"
 import ThemePlaceholdersService from "../services/theme/placeholders"
+import { Router } from "express"
 
 class ThemeRoute {
-  constructor(router: any) {
+  constructor(router: Router) {
     this.registerRoutes(router)
   }
 
-  registerRoutes(router) {
+  registerRoutes(router: Router) {
     router.get(
       "/v1/theme/export",
       security.checkUserScope.bind(this, security.scope.READ_THEME),

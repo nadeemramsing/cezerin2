@@ -10,6 +10,8 @@ import security from "./lib/security"
 import dashboardWebSocket from "./lib/dashboardWebSocket"
 import ajaxRouter from "./ajaxRouter"
 import apiRouter from "./apiRouter"
+import cors from "cors"
+const port = process.env.port || 3001
 const app = express()
 
 const STATIC_OPTIONS = {
@@ -18,7 +20,7 @@ const STATIC_OPTIONS = {
 
 app.set("trust proxy", 1)
 app.use(helmet())
-
+app.use(cors())
 app.get("/images/:entity/:id/:size/:filename", (req, res, next) => {
   // A stub of image resizing (can be done with Nginx)
   const newUrl = `/images/${req.params.entity}/${req.params.id}/${req.params.filename}`
@@ -56,9 +58,8 @@ app.use("/ajax", ajaxRouter)
 app.use("/api", apiRouter)
 app.use(logger.sendResponse)
 
-const server = app.listen(settings.apiListenPort, () => {
-  const serverAddress = server.address()
-  winston.info(`API running at http://localhost:${serverAddress.port}`)
-})
+app.listen(port, () =>
+  winston.info(`Example app listening at http://localhost:${port}`)
+)
 
-dashboardWebSocket.listen(server)
+dashboardWebSocket.listen(app)

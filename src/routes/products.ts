@@ -4,145 +4,144 @@ import ProductOptionsService from "../services/products/options"
 import ProductOptionValuesService from "../services/products/optionValues"
 import ProductVariantsService from "../services/products/variants"
 import ProductImagesService from "../services/products/images"
+import { Router } from "express"
 
 class ProductsRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/products",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getProducts.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/products",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.addProduct.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/products/:productId",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getSingleProduct.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.updateProduct.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/products/:productId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.deleteProduct.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/products/:productId/images",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getImages.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/products/:productId/images",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.addImage.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId/images/:imageId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.updateImage.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/products/:productId/images/:imageId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.deleteImage.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/products/:productId/sku",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.isSkuExists.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/products/:productId/slug",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.isSlugExists.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/products/:productId/options",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getOptions.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/products/:productId/options/:optionId",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getSingleOption.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/products/:productId/options",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.addOption.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId/options/:optionId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.updateOption.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/products/:productId/options/:optionId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.deleteOption.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/products/:productId/options/:optionId/values",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getOptionValues.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/products/:productId/options/:optionId/values/:valueId",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getSingleOptionValue.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/products/:productId/options/:optionId/values",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.addOptionValue.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId/options/:optionId/values/:valueId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.updateOptionValue.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/products/:productId/options/:optionId/values/:valueId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.deleteOptionValue.bind(this)
     )
 
-    this.router.get(
+    router.get(
       "/v1/products/:productId/variants",
       security.checkUserScope.bind(this, security.scope.READ_PRODUCTS),
       this.getVariants.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/products/:productId/variants",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.addVariant.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId/variants/:variantId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.updateVariant.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/products/:productId/variants/:variantId",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.deleteVariant.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/products/:productId/variants/:variantId/options",
       security.checkUserScope.bind(this, security.scope.WRITE_PRODUCTS),
       this.setVariantOption.bind(this)

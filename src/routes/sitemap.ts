@@ -3,12 +3,10 @@ import SitemapService from "../services/sitemap"
 
 class SitemapRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/sitemap",
       security.checkUserScope.bind(this, security.scope.READ_SITEMAP),
       this.getPaths.bind(this)

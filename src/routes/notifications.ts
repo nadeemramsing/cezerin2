@@ -1,13 +1,12 @@
 import PaymentGateways from "../paymentGateways"
+import { Router } from "express"
 
 class NotificationsRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.post(
+  registerRoutes(router: Router) {
+    router.post(
       "/v1/notifications/:gateway",
       this.paymentNotification.bind(this)
     )

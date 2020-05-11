@@ -3,57 +3,55 @@ import CustomersService from "../services/customers/customers"
 
 class CustomersRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/customers",
       security.checkUserScope.bind(this, security.scope.READ_CUSTOMERS),
       this.getCustomers.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/customers",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.addCustomer.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/customers/:id",
       security.checkUserScope.bind(this, security.scope.READ_CUSTOMERS),
       this.getSingleCustomer.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/customers/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.updateCustomer.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/customers/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.deleteCustomer.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/customers/:id/addresses",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.addAddress.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/customers/:id/addresses/:address_id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.updateAddress.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/customers/:id/addresses/:address_id",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.deleteAddress.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/customers/:id/addresses/:address_id/default_billing",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.setDefaultBilling.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/customers/:id/addresses/:address_id/default_shipping",
       security.checkUserScope.bind(this, security.scope.WRITE_CUSTOMERS),
       this.setDefaultShipping.bind(this)

@@ -1,34 +1,33 @@
 import security from "../lib/security"
 import PagesService from "../services/pages/pages"
+import { Router } from "express"
 
 class PagesRoute {
-  constructor(router) {
-    this.router = router
-    this.registerRoutes()
+  constructor(router: Router) {
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router: Router) {
+    router.get(
       "/v1/pages",
       security.checkUserScope.bind(this, security.scope.READ_PAGES),
       this.getPages.bind(this)
     )
-    this.router.post(
+    router.post(
       "/v1/pages",
       security.checkUserScope.bind(this, security.scope.WRITE_PAGES),
       this.addPage.bind(this)
     )
-    this.router.get(
+    router.get(
       "/v1/pages/:id",
       security.checkUserScope.bind(this, security.scope.READ_PAGES),
       this.getSinglePage.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/pages/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_PAGES),
       this.updatePage.bind(this)
     )
-    this.router.delete(
+    router.delete(
       "/v1/pages/:id",
       security.checkUserScope.bind(this, security.scope.WRITE_PAGES),
       this.deletePage.bind(this)

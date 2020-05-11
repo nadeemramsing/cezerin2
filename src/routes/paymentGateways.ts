@@ -3,17 +3,15 @@ import PaymentGatewaysService from "../services/settings/paymentGateways"
 
 class PaymentGatewaysRoute {
   constructor(router) {
-    this.router = router
-    this.registerRoutes()
+    this.registerRoutes(router)
   }
-  router
-  registerRoutes() {
-    this.router.get(
+  registerRoutes(router) {
+    router.get(
       "/v1/payment_gateways/:name",
       security.checkUserScope.bind(this, security.scope.READ_PAYMENT_METHODS),
       this.getGateway.bind(this)
     )
-    this.router.put(
+    router.put(
       "/v1/payment_gateways/:name",
       security.checkUserScope.bind(this, security.scope.WRITE_PAYMENT_METHODS),
       this.updateGateway.bind(this)
